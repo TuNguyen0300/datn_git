@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".Parent_Home"
+    android:background="@drawable/img_6">
+
+    <LinearLayout
+        android:id="@+id/layoutheader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/poppinsbold"
+            android:text="Wellcome, "
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/txtFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/poppinsbold"
+            android:text="Nguyen Van An"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutheader"
+        android:layout_marginLeft="290dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppinsmedium"
+            android:text="filter"
+            android:textColor="#26548E"
+            android:textSize="17dp" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/ic_filter" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtFindtutor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="120dp"
+        android:fontFamily="@font/poppinsbold"
+        android:text="Finding tutors"
+        android:textColor="#1E6B8E"
+        android:textSize="20dp" />
+
+
+    <ListView
+        android:id="@+id/listviewTutor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Btm_Navigator"
+        android:layout_below="@+id/txtFindtutor"
+        android:layout_marginTop="2dp" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/Btm_Navigator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#C5F8B3"
+        app:itemIconTint="@color/teal_200"
+        app:itemTextColor="@color/teal_200"
+        app:menu="@menu/btm_nav_menu_parent" />
+
+</RelativeLayout>

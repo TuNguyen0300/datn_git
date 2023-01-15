@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/imgAvatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/img_5" />
+
+    <TextView
+        android:id="@+id/txtFullname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imgAvatar"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="35dp"
+        android:textSize="20dp"
+        android:textColor="@color/teal_200"
+        android:fontFamily="@font/poppinsmedium"
+        android:text="fullname"/>
+
+    <ImageView
+        android:id="@+id/imGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgAvatar"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_gender" />
+    <TextView
+        android:id="@+id/txtGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgAvatar"
+        android:layout_toRightOf="@+id/imGender"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:text="gender"
+        android:textSize="17dp" />
+
+    <ImageView
+        android:id="@+id/imSchool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgAvatar"
+        android:layout_toRightOf="@id/txtGender"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_school" />
+
+    <TextView
+        android:id="@+id/txtSchool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgAvatar"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/imSchool"
+        android:text="school"
+        android:textSize="17dp" />
+
+    <ImageView
+        android:id="@+id/imSub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtSchool"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_book" />
+    <TextView
+        android:id="@+id/txtSubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtSchool"
+        android:layout_toRightOf="@+id/imSub"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:text="subject"
+        android:textSize="17dp" />
+
+    <ImageView
+        android:id="@+id/imExp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtSubject"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_exp" />
+    <TextView
+        android:id="@+id/txtExp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtSubject"
+        android:layout_toRightOf="@+id/imExp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:text="experience"
+        android:textSize="17dp" />
+
+    <TextView
+        android:id="@+id/txtViewMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtExp"
+        android:layout_marginLeft="230dp"
+        android:layout_marginTop="5dp"
+        android:text="View more >>"
+        android:textColor="#AA0E0E"
+        android:textSize="18dp" />
+</RelativeLayout>

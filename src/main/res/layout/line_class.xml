@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/txtDescript"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="description"
+        android:textSize="20dp"
+        android:fontFamily="@font/poppinsmedium"
+        android:textColor="#1C7120"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"/>
+
+    <ImageView
+        android:id="@+id/imReq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtDescript"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_check" />
+    <TextView
+        android:id="@+id/txtRequire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtDescript"
+        android:layout_toRightOf="@+id/imReq"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:text="requirement"
+        android:textSize="18dp" />
+
+    <ImageView
+        android:id="@+id/imSub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtRequire"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_book" />
+    <TextView
+        android:id="@+id/txtSubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtRequire"
+        android:layout_toRightOf="@+id/imSub"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:background="#DEF1FA"
+        android:text="subject"
+        android:textColor="#4864F3"
+        android:textSize="18dp" />
+
+    <ImageView
+        android:id="@+id/imFee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtRequire"
+        android:layout_toRightOf="@+id/txtSubject"
+        android:layout_marginLeft="50dp"
+        android:src="@drawable/ic_money"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/txFee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtRequire"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/imFee"
+        android:text="fee"
+        android:textSize="18dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtRequire"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/txFee"
+        android:text="/once"
+        android:textSize="18dp" />
+
+    <ImageView
+        android:id="@+id/imAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtSubject"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_place" />
+
+    <TextView
+        android:id="@+id/txtAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtSubject"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/imAddress"
+        android:background="#F8F1B6"
+        android:text="address"
+        android:textColor="#C59C21"
+        android:textSize="18dp" />
+
+    <ImageView
+        android:id="@+id/imDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtSubject"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/txtAddress"
+        android:src="@drawable/ic_calendar" />
+
+    <TextView
+        android:id="@+id/txtCDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtSubject"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/imDate"
+        android:text="Create date"
+        android:textSize="17dp" />
+
+    <TextView
+        android:id="@+id/txtViewMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtAddress"
+        android:layout_marginLeft="230dp"
+        android:layout_marginTop="5dp"
+        android:text="View more >>"
+        android:textColor="#AA0E0E"
+        android:textSize="18dp" />
+
+</RelativeLayout>

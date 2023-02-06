@@ -1,17 +1,11 @@
 package com.example.private_tutor_app;
 
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Base64;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -31,32 +25,18 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
+import com.example.private_tutor_app.utilities.Constants;
 import com.example.private_tutor_app.utilities.PreferenceManager;
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.StorageTask;
-import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Sign_up extends AppCompatActivity implements View.OnClickListener{
     EditText edtFullname, edtEmail, edtPassword;
@@ -217,69 +197,72 @@ public class Sign_up extends AppCompatActivity implements View.OnClickListener{
         String email = edtEmail.getText().toString();
         String password = edtPassword.getText().toString();
 
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        HashMap<String, Object> user = new HashMap<>();
-        user.put("fullname", fullname);
-        user.put("email", email);
-        user.put("password", password);
-        user.put("role", role);
-        user.put("imageUrl", "default");
-        database.collection("Users")
-                .add(user).addOnSuccessListener(documentReference -> {
-                    preferenceManager.putBoolean("isSignedIn", true);
-                    preferenceManager.putString("id", documentReference.getId());
-                    preferenceManager.putString("fullname", fullname);
-                    preferenceManager.putString("email", email);
-                    preferenceManager.putString("role", role);
-                    preferenceManager.putString("imageUrl","default");
-                    Intent intent = new Intent(Sign_up.this, Sign_in.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    Toast.makeText(Sign_up.this, "Register successfully", Toast.LENGTH_SHORT).show();
-                    startActivity(intent);
-                    finish();
-                })
-                .addOnFailureListener(exception -> {
-                    Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
-                    edtErr.setText(exception.getMessage());
-                    dialog.dismiss();
-                });
-
-//        mAuth.createUserWithEmailAndPassword(email, password)
-//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if(task.isSuccessful()) {
-//                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
-//                            assert firebaseUser != null;
-//                            String userID = firebaseUser.getUid();
-//                            String email = firebaseUser.getEmail();
-//                            Constants.ID_USER = userID;
-//
-//                            reference = FirebaseDatabase.getInstance().getReference("Users").child(userID);
-//
-//                            HashMap<Object, String> map = new HashMap<>();
-//                            map.put("id", userID);
-//                            map.put("fullname", fullname);
-//                            map.put("email", email);
-//                            map.put("password", password);
-//                            map.put("role", role);
-//                            map.put("imageUrl", "default");
-//
-//                            reference.setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//                                    Intent intent = new Intent(Sign_up.this, Sign_in.class);
-//                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                    Toast.makeText(Sign_up.this, "Register successfully", Toast.LENGTH_SHORT).show();
-//                                    startActivity(intent);
-//                                    finish();
-//                                }
-//                            });
-//                        }
-//                         else {
-//                            Toast.makeText(Sign_up.this, "Fail to register", Toast.LENGTH_SHORT).show();
-//                        }}
-//
+//        FirebaseFirestore database = FirebaseFirestore.getInstance();
+//        HashMap<String, Object> user = new HashMap<>();
+//        user.put("fullname", fullname);
+//        user.put("email", email);
+//        user.put("password", password);
+//        user.put("role", role);
+//        user.put("imageUrl", "default");
+//        database.collection("Users")
+//                .add(user).addOnSuccessListener(documentReference -> {
+//                    preferenceManager.putBoolean("isSignedIn", true);
+//                    preferenceManager.putString("id", documentReference.getId());
+//                    preferenceManager.putString("fullname", fullname);
+//                    preferenceManager.putString("email", email);
+//                    preferenceManager.putString("role", role);
+//                    preferenceManager.putString("imageUrl","default");
+//                    Intent intent = new Intent(Sign_up.this, Sign_in.class);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    Toast.makeText(Sign_up.this, "Register successfully", Toast.LENGTH_SHORT).show();
+//                    startActivity(intent);
+//                    finish();
+//                })
+//                .addOnFailureListener(exception -> {
+//                    Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
+//                    edtErr.setText(exception.getMessage());
+//                    dialog.dismiss();
 //                });
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()) {
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            assert firebaseUser != null;
+                            String userID = firebaseUser.getUid();
+                            String email = firebaseUser.getEmail();
+                            Constants.ID_USER = userID;
+
+                            reference = FirebaseDatabase.getInstance().getReference("Users").child(userID);
+
+                            HashMap<Object, String> map = new HashMap<>();
+                            map.put("id", userID);
+                            map.put("fullname", fullname);
+                            map.put("email", email);
+                            map.put("password", password);
+                            map.put("role", role);
+                            map.put("imageUrl", "default");
+
+                            reference.setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Intent intent = new Intent(Sign_up.this, Sign_in.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    Toast.makeText(Sign_up.this, "Register successfully", Toast.LENGTH_SHORT).show();
+                                    startActivity(intent);
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
+                        }
+                         else {
+                            Toast.makeText(Sign_up.this, "Fail to register", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+                        }}
+
+                });
     }
 }

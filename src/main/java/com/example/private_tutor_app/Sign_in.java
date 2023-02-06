@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +21,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.private_tutor_app.utilities.Constants;
+import com.example.private_tutor_app.utilities.PreferenceManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -41,6 +42,7 @@ public class Sign_in extends AppCompatActivity implements View.OnClickListener {
     String urlLoginParent = Constants.BASE_URL + "Tutor_app/getParent.php";
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    PreferenceManager preferenceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +80,8 @@ public class Sign_in extends AppCompatActivity implements View.OnClickListener {
         dialog = new ProgressDialog(this);
         dialog.setMessage("Loading...");
         dialog.setCancelable(false);
+
+        preferenceManager = new PreferenceManager(this);
 
         btnSignIn.setOnClickListener(this);
 
@@ -122,6 +126,7 @@ public class Sign_in extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void Lo(String url, String email, String password){
+
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
@@ -175,9 +180,11 @@ public class Sign_in extends AppCompatActivity implements View.OnClickListener {
                             }
                             if(count == 0){
                                 Toast.makeText(Sign_in.this, "Email or password is wrong", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
                             }
                         } catch (Exception e){
                             e.printStackTrace();
+                            dialog.dismiss();
                         }
                     }
                 },
@@ -185,9 +192,28 @@ public class Sign_in extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(Sign_in.this, error.toString(), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
                     }
                 }
         );
         requestQueue.add(jsonArrayRequest);
     }
+//    public void SignIn(){
+//        FirebaseFirestore database = FirebaseFirestore.getInstance();
+//        database.collection("Users")
+//                .whereEqualTo("email", edtEmail.getText().toString().trim())
+//                .whereEqualTo("password", edtPassword.getText().toString().trim())
+//                .get()
+//                .addOnCompleteListener(task -> {
+//                    if(task.isSuccessful() && task.getResult() != null
+//                            && task.getResult().getDocuments().size()>0){
+//                        DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+//                        preferenceManager.putBoolean("isSignedIn", true);
+//                        preferenceManager.putString("id", documentSnapshot.getId());
+//                        preferenceManager.putString("email", documentSnapshot.getString("email"));
+//                        preferenceManager.putString("fullname", documentSnapshot.getString("fullname"));
+//
+//                    } else Toast.makeText(this, "Unable to login", Toast.LENGTH_SHORT).show();
+//                });
+//    }
 }

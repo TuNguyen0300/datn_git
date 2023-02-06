@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:paddingVertical="10dp"
+    >
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgAvatar"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="10dp"
+        android:paddingVertical="10dp"
+        android:layout_marginTop="10dp" />
 
     <TextView
         android:id="@+id/txtFullnam"
@@ -21,16 +25,18 @@
         android:text="Fullname"
         android:textColor="#296A2B"
         android:textSize="20dp" />
+
     <TextView
+        android:id="@+id/txtEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/imgAvatar"
         android:layout_below="@id/txtFullnam"
-        android:text="email"
         android:layout_marginLeft="20dp"
-        android:textSize="15dp"
-        android:maxLines="1"
+        android:layout_toRightOf="@+id/imgAvatar"
         android:fontFamily="@font/poppinsmedium"
-        android:textColor="@color/teal_200"/>
+        android:maxLines="1"
+        android:text="email"
+        android:textColor="@color/teal_200"
+        android:textSize="15dp" />
 
 </RelativeLayout>

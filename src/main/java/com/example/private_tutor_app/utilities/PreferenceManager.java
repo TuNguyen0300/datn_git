@@ -3,8 +3,6 @@ package com.example.private_tutor_app.utilities;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.private_tutor_app.Constants;
-
 public class PreferenceManager {
     private final SharedPreferences sharedPreferences;
 

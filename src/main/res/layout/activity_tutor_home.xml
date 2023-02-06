@@ -14,60 +14,67 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="@font/poppinsbold"
-            android:text="Wellcome, "
-            android:textSize="25dp" />
-
-        <TextView
             android:id="@+id/txtFullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="25dp"
             android:fontFamily="@font/poppinsbold"
             android:layout_marginBottom="20dp"
-            android:text="Nguyen Van An"
+            android:text="Fullname"
             android:textSize="25dp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/filter"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/search"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layoutheader"
-        android:orientation="horizontal"
-        android:layout_marginLeft="290dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="filter"
-            android:textSize="17dp"
-            android:textColor="#26548E"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/poppinsmedium"/>
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/layoutheader">
+
+        <EditText
+            android:id="@+id/boxSearch"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/input_text"
+            android:fontFamily="@font/poppinsmedium"
+            android:hint="Search in app"
+            android:maxLines="1"
+            android:paddingHorizontal="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnSearch"
+            app:layout_constraintHorizontal_bias="0.638"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_filter"
+            android:id="@+id/btnSearch"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="4dp"/>
-    </LinearLayout>
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/button"
+            android:src="@drawable/ic_search"
+            app:layout_constraintBottom_toBottomOf="@id/boxSearch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/boxSearch"
+
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/txtFindclass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/poppinsbold"
         android:text="Finding class"
+        android:layout_below="@+id/search"
         android:textColor="#1E6B8E"
         android:textSize="20dp" />
 

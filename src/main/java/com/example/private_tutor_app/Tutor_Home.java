@@ -16,6 +16,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.private_tutor_app.adapter.ClassAdapter;
+import com.example.private_tutor_app.utilities.Constants;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
@@ -43,7 +45,7 @@ public class Tutor_Home extends AppCompatActivity {
         nav = (BottomNavigationView) findViewById(R.id.Btm_Navigator);
         txtFullName = findViewById(R.id.txtFullName);
 
-        txtFullName.setText(Constants.FULLNAME);
+        txtFullName.setText("Wellcome, " + Constants.FULLNAME);
 
         nav.setSelectedItemId(R.id.navigation_home);
 

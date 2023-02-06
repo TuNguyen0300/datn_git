@@ -2,6 +2,8 @@ package com.example.private_tutor_app;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,21 +12,41 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.private_tutor_app.adapter.UserAdapter;
+import com.example.private_tutor_app.model.Message;
+import com.example.private_tutor_app.model.User;
+import com.example.private_tutor_app.utilities.Constants;
 import com.example.private_tutor_app.utilities.PreferenceManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Parent_Chat extends AppCompatActivity {
     BottomNavigationView nav;
     FloatingActionButton newChat;
-    PreferenceManager preferenceManager;
-    EditText edtE;
+    RecyclerView recyclerView;
+
+    UserAdapter userAdapter;
+    List<User> mUsers;
+
+    FirebaseUser fUser;
+    DatabaseReference reference;
+
+    List<String> userList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +54,6 @@ public class Parent_Chat extends AppCompatActivity {
         setContentView(R.layout.activity_parent_chat);
         nav = (BottomNavigationView) findViewById(R.id.Btm_Navigator);
         newChat = findViewById(R.id.fabNewchat);
-        preferenceManager = new PreferenceManager(this);
         nav.setSelectedItemId(R.id.navigation_home);
 
         nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -59,9 +80,6 @@ public class Parent_Chat extends AppCompatActivity {
             }
         });
 
-        edtE = findViewById(R.id.edtError);
-
-        getToken();
         newChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,35 +88,73 @@ public class Parent_Chat extends AppCompatActivity {
             }
         });
 
-    }
-    private void showToast(String message){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-    private void getToken (){
-        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
-    }
-    private void updateToken(String token){
-        Toast.makeText(this, Constants.ID_USER, Toast.LENGTH_SHORT).show();
-        try {
-            FirebaseFirestore database = FirebaseFirestore.getInstance();
-            DocumentReference documentReference = database.collection("Users").document(preferenceManager.getString("id"));
-            documentReference.update("fcmToken", token)
-                    .addOnSuccessListener(unused -> {showToast("Update token successfully");})
-                    .addOnFailureListener(e -> {showToast("fail");});
-        } catch (Exception e){
-            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
-            edtE.setText(e.toString());
-        }
-    }
-    private void clear(){
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        DocumentReference documentReference = database
-                .collection("Users").document(preferenceManager.getString("id"));
-        HashMap<String, Object> updates = new HashMap<>();
-        updates.put("fcmToken", FieldValue.delete());
-        documentReference.update(updates)
-                .addOnSuccessListener(unused -> {preferenceManager.clear();})
-                .addOnFailureListener(e -> {showToast("fail");});
+        recyclerView = findViewById(R.id.listUser);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
+        llm.setStackFromEnd(true);
+        recyclerView.setLayoutManager(llm);
 
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        userList = new ArrayList<>();
+
+        reference = FirebaseDatabase.getInstance().getReference("Chats");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userList.clear();
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    Message message = dataSnapshot.getValue(Message.class);
+                    if(message.getSender().equals(fUser.getUid())){
+                        userList.add(message.getReceiver());
+                    }
+                    if(message.getReceiver().equals(fUser.getUid())){
+                        userList.add(message.getSender());
+                    }
+                }
+
+                readChats();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void readChats(){
+        mUsers = new ArrayList<>();
+
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mUsers.clear();
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    User user = dataSnapshot.getValue(User.class);
+                    for (String id: userList){
+                        if(user.getId().equals(id)){
+                            if(mUsers.size() != 0){
+                                for(User user1: mUsers){
+                                    if(!user.getId().equals(user1.getId())){
+                                        mUsers.add(user);
+                                    }
+                                }
+                            } else {
+                                mUsers.add(user);
+                            }
+                        }
+                    }
+                }
+                userAdapter = new UserAdapter(getApplicationContext(), mUsers);
+                recyclerView.setAdapter(userAdapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

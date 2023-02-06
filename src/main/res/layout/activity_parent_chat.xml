@@ -7,10 +7,16 @@
     tools:context=".Parent_Chat"
     android:background="#4CAA50">
 
-    <EditText
-        android:id="@+id/edtError"
+    <TextView
+        android:id="@+id/txtMessage"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppinsbold"
+        android:text="Message"
+        android:textColor="@color/white"
+        android:textSize="22dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabNewchat"
@@ -29,11 +35,16 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_above="@+id/Btm_Navigator"
-        android:layout_below="@+id/edtError"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/txtMessage"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="0dp"
         android:background="@drawable/gradient5">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listUser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp"
+            android:overScrollMode="never" />
 
     </FrameLayout>
 

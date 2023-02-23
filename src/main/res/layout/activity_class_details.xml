@@ -25,7 +25,7 @@
         android:background="@color/white"
         android:fontFamily="@font/poppinsmedium"
         android:paddingHorizontal="7dp"
-        android:text="Class detail"
+        android:text="Class details"
         android:textColor="@color/teal_200"
         android:textSize="19dp" />
 
@@ -185,7 +185,7 @@
             android:id="@+id/imReq"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtTimes"
+            android:layout_below="@+id/txtOwner"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:src="@drawable/ic_check" />
@@ -194,7 +194,7 @@
             android:id="@+id/txtReq"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtTimes"
+            android:layout_below="@+id/txtOwner"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/imReq"
@@ -206,7 +206,7 @@
             android:id="@+id/requirement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtTimes"
+            android:layout_below="@+id/txtOwner"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/txtReq"
@@ -218,7 +218,7 @@
             android:id="@+id/imAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtReq"
+            android:layout_below="@+id/txtTimes"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:src="@drawable/ic_place" />
@@ -227,7 +227,7 @@
             android:id="@+id/txtAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtReq"
+            android:layout_below="@+id/txtTimes"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/imAdd"
@@ -239,7 +239,7 @@
             android:id="@+id/address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtReq"
+            android:layout_below="@+id/txtTimes"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/txtAdd"
@@ -316,7 +316,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtCDate"
+            android:layout_below="@+id/txtReq"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="50dp"
             android:layout_marginRight="20dp"
@@ -329,7 +329,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/poppinsmedium"
-                android:text="Contact to creator"
+                android:text="Contact with owner"
                 android:textColor="#5C551E"
                 android:textSize="18dp" />
 

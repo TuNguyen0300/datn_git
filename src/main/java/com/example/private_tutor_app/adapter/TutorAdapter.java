@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.private_tutor_app.R;
 import com.example.private_tutor_app.TutorDetails;
 import com.example.private_tutor_app.model.Tutor;
@@ -37,7 +39,10 @@ public class TutorAdapter extends BaseAdapter {
     }
 
     private class ViewHolder{
-        TextView txtFullname, txtGender, txtSchool, txtSubject, txtExperience, txtViewMore, txtEmail, txtPnumber, txtAdd, txtYob;
+        TextView txtFullname, txtGender, txtSchool, txtSubject
+                , txtExperience, txtViewMore, txtEmail, txtPnumber
+                , txtAdd, txtYob;
+        ImageView imgAvatar, imgHeartOut, imgHeart;
     }
 
     @Override
@@ -52,6 +57,7 @@ public class TutorAdapter extends BaseAdapter {
             holder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(layout, null);
+            holder.imgAvatar = view.findViewById(R.id.imgAvatar);
             holder.txtFullname = (TextView) view.findViewById(R.id.txtFullname);
             holder.txtGender = (TextView) view.findViewById(R.id.txtGender);
             holder.txtSchool = (TextView) view.findViewById(R.id.txtSchool);
@@ -62,6 +68,8 @@ public class TutorAdapter extends BaseAdapter {
             holder.txtPnumber = (TextView) view.findViewById(R.id.pNumber);
             holder.txtAdd = (TextView) view.findViewById(R.id.address);
             holder.txtYob = (TextView) view.findViewById(R.id.yob);
+            holder.imgHeartOut = view.findViewById(R.id.imgHeartOutline);
+            holder.imgHeart = view.findViewById(R.id.imgHeart);
             view.setTag(holder);
         } else {
             holder = (TutorAdapter.ViewHolder) view.getTag();
@@ -73,6 +81,11 @@ public class TutorAdapter extends BaseAdapter {
         holder.txtSchool.setText(tutor.getSchool());
         holder.txtSubject.setText(tutor.getSubject());
         holder.txtExperience.setText(tutor.getExperience());
+        if(tutor.getImageUrl().equals("default")){
+            holder.imgAvatar.setImageResource(R.drawable.img_5);
+        } else {
+            Glide.with(context).load(tutor.getImageUrl()).into(holder.imgAvatar);
+        }
 
         holder.txtViewMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +93,21 @@ public class TutorAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, TutorDetails.class);
                 intent.putExtra("dataTutor", tutor);
                 context.startActivity(intent);
+            }
+        });
+
+        holder.imgHeartOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.imgHeart.setVisibility(View.VISIBLE);
+                holder.imgHeartOut.setVisibility(View.INVISIBLE);
+            }
+        });
+        holder.imgHeart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.imgHeart.setVisibility(View.INVISIBLE);
+                holder.imgHeartOut.setVisibility(View.VISIBLE);
             }
         });
         return view;

@@ -1,11 +1,14 @@
 package com.example.private_tutor_app;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +18,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.private_tutor_app.model.User;
 import com.example.private_tutor_app.utilities.Constants;
@@ -36,13 +46,14 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Tutor_Profile extends AppCompatActivity {
 
     BottomNavigationView nav;
     ImageView imgAvatar;
     TextView txtFullname, txtEmail;
-    LinearLayout layUpdate, layAccClass, laySavedClass, layLogout;
+    LinearLayout layUpdate, laySavedClass, layLogout;
 
     FirebaseUser firebaseUser;
     DatabaseReference reference;
@@ -50,6 +61,8 @@ public class Tutor_Profile extends AppCompatActivity {
     static int IMAGE_REQUEST = 1;
     Uri imgUri = null;
     StorageTask uploadTask;
+
+    String urlUpload = Constants.BASE_URL + "Tutor_app/uploadImg.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +75,6 @@ public class Tutor_Profile extends AppCompatActivity {
         layLogout = findViewById(R.id.layLogout);
         laySavedClass = findViewById(R.id.layFavouriteTutor);
         layUpdate = findViewById(R.id.layUpdate);
-        layAccClass = findViewById(R.id.layCreatedClass);
 
         txtFullname.setText(Constants.FULLNAME);
         txtEmail.setText(Constants.EMAIL);
@@ -79,7 +91,7 @@ public class Tutor_Profile extends AppCompatActivity {
                         startActivity(new Intent(Tutor_Profile.this, Tutor_Home.class));
                         overridePendingTransition(0,0);
                         return true;
-                    case R.id.navigation_dashboard:
+                    case R.id.navigation_forum:
                         startActivity(new Intent(Tutor_Profile.this, Tutor_DashBoard.class));
                         overridePendingTransition(0,0);
                         return true;
@@ -175,6 +187,8 @@ public class Tutor_Profile extends AppCompatActivity {
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("imageUrl", mUri);
                         reference.updateChildren(map);
+
+                        UploadImgSQL(urlUpload, mUri);
                     } else{
                         Toast.makeText(Tutor_Profile.this, "fail", Toast.LENGTH_SHORT).show();
                     }
@@ -200,5 +214,38 @@ public class Tutor_Profile extends AppCompatActivity {
                 uploadImage();
             }
         }
+    }
+    public void UploadImgSQL(String url, String photo){
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.equals("Update successfully")){
+                            Toast.makeText(Tutor_Profile.this, "Changed avatar", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(Tutor_Profile.this, response, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        ){
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param = new HashMap<>();
+                param.put("id",String.valueOf(Constants.ID_TUTOR));
+                param.put("role", "tutor");
+                param.put("urlImg", photo);
+                return param;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 }

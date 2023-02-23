@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.private_tutor_app.model.Class;
+
 public class CreatedClassDetail extends AppCompatActivity {
 
     TextView txtDes, txtReq, txtSub, txtFee, txtAdd, txtGrade, txtDate, txtTimes;

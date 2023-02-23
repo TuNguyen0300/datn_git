@@ -26,7 +26,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.private_tutor_app.utilities.Constants;
-import com.example.private_tutor_app.utilities.PreferenceManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -49,11 +48,8 @@ public class Sign_up extends AppCompatActivity implements View.OnClickListener{
 
     FirebaseAuth mAuth;
     DatabaseReference reference;
-    PreferenceManager preferenceManager;
-    EditText edtErr;
 
-    String urlInsertTutor = Constants.BASE_URL + "Tutor_app/insertTutor.php";
-    String urlInsertParent = Constants.BASE_URL + "Tutor_app/insertParent.php";
+    String urlRegister = Constants.BASE_URL + "Tutor_app/register.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +65,6 @@ public class Sign_up extends AppCompatActivity implements View.OnClickListener{
         rd_parent = findViewById(R.id.radio_parent);
         rd_tutor = findViewById(R.id.radio_tutor);
         progressBar = findViewById(R.id.progressBar);
-        edtErr = findViewById(R.id.edtError);
 
         rt_signin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +92,6 @@ public class Sign_up extends AppCompatActivity implements View.OnClickListener{
         dialog.setCancelable(false);
 
         mAuth = FirebaseAuth.getInstance();
-        preferenceManager = new PreferenceManager(this);
 
         btn_signup.setOnClickListener(this);
     }
@@ -110,7 +104,12 @@ public class Sign_up extends AppCompatActivity implements View.OnClickListener{
         String fullname = edtFullname.getText().toString();
         String email = edtEmail.getText().toString();
         String password = edtPassword.getText().toString();
-
+        String role = "";
+        if(rd_parent.isChecked()){
+            role = "parent";
+        } else if(rd_tutor.isChecked()){
+            role = "tutor";
+        }
         if (fullname.isEmpty()) {
             edtFullname.setError("Fullname is required");
             edtFullname.requestFocus();
@@ -139,90 +138,16 @@ public class Sign_up extends AppCompatActivity implements View.OnClickListener{
         if (!rd_parent.isChecked() && !rd_tutor.isChecked()){
             Toast.makeText(this, "You must choose your role as a tutor/parent", Toast.LENGTH_SHORT).show();
         }
-        if( !fullname.equals(null) && !email.equals(null) && !password.equals(null)){
-            if(rd_parent.isChecked()){
-                dialog.show();
-                InsertUserSQL(urlInsertParent);
-            } else if(rd_tutor.isChecked()){
-                dialog.show();
-                InsertUserSQL(urlInsertTutor);
-            }
+        if( !fullname.equals(null) && !email.equals(null) && !password.equals(null) && (rd_parent.isChecked() || rd_tutor.isChecked())){
+            InsertUserFire(role);
         }
 
-    }
-
-    public void InsertUserSQL(String url){
-        RequestQueue requestQueue= Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        if(response.trim().equals("Success create")){
-                            if(rd_parent.isChecked()){
-                                InsertUserFire("parent");
-                            } else if(rd_tutor.isChecked()){
-                                InsertUserFire("tutor");
-                            }
-                        } else {
-                            Toast.makeText(Sign_up.this, "Fail to sign up" + response.toString(), Toast.LENGTH_SHORT).show();
-                            edtErr.setText(response);
-                            dialog.dismiss();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Sign_up.this, error.toString(), Toast.LENGTH_SHORT).show();
-                        Log.d("AAA", "onErrorResponse: " + error.toString());
-                    }
-                }
-        ){
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> param = new HashMap<>();
-                param.put("fullname", edtFullname.getText().toString().trim());
-                param.put("email", edtEmail.getText().toString().trim());
-                param.put("password", edtPassword.getText().toString().trim());
-                //param.put("photo", "null");
-                return param;
-            }
-        };
-        requestQueue.add(stringRequest);
     }
 
     public void InsertUserFire(String role){
         String fullname = edtFullname.getText().toString();
         String email = edtEmail.getText().toString();
         String password = edtPassword.getText().toString();
-
-//        FirebaseFirestore database = FirebaseFirestore.getInstance();
-//        HashMap<String, Object> user = new HashMap<>();
-//        user.put("fullname", fullname);
-//        user.put("email", email);
-//        user.put("password", password);
-//        user.put("role", role);
-//        user.put("imageUrl", "default");
-//        database.collection("Users")
-//                .add(user).addOnSuccessListener(documentReference -> {
-//                    preferenceManager.putBoolean("isSignedIn", true);
-//                    preferenceManager.putString("id", documentReference.getId());
-//                    preferenceManager.putString("fullname", fullname);
-//                    preferenceManager.putString("email", email);
-//                    preferenceManager.putString("role", role);
-//                    preferenceManager.putString("imageUrl","default");
-//                    Intent intent = new Intent(Sign_up.this, Sign_in.class);
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    Toast.makeText(Sign_up.this, "Register successfully", Toast.LENGTH_SHORT).show();
-//                    startActivity(intent);
-//                    finish();
-//                })
-//                .addOnFailureListener(exception -> {
-//                    Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
-//                    edtErr.setText(exception.getMessage());
-//                    dialog.dismiss();
-//                });
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -232,8 +157,6 @@ public class Sign_up extends AppCompatActivity implements View.OnClickListener{
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                             assert firebaseUser != null;
                             String userID = firebaseUser.getUid();
-                            String email = firebaseUser.getEmail();
-                            Constants.ID_USER = userID;
 
                             reference = FirebaseDatabase.getInstance().getReference("Users").child(userID);
 
@@ -244,6 +167,8 @@ public class Sign_up extends AppCompatActivity implements View.OnClickListener{
                             map.put("password", password);
                             map.put("role", role);
                             map.put("imageUrl", "default");
+
+                            InsertUserSQL(urlRegister, role, userID);
 
                             reference.setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -264,5 +189,40 @@ public class Sign_up extends AppCompatActivity implements View.OnClickListener{
                         }}
 
                 });
+    }
+    public void InsertUserSQL(String url, String role, String id_user){
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.trim().equals("Success create")){
+                        } else {
+                            Toast.makeText(Sign_up.this, "Fail to sign up" + response.toString(), Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Sign_up.this, error.toString(), Toast.LENGTH_SHORT).show();
+                        Log.d("AAA", "onErrorResponse: " + error.toString());
+                    }
+                }
+        ){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param = new HashMap<>();
+                param.put("fullname", edtFullname.getText().toString().trim());
+                param.put("email", edtEmail.getText().toString().trim());
+                param.put("password", edtPassword.getText().toString().trim());
+                param.put("role", role);
+                param.put("id_user", id_user);
+                return param;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 }

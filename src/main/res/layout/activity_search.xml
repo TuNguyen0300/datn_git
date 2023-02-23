@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Search">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="20dp">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_arrow_back" />
+
+        <EditText
+            android:id="@+id/boxSearch"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toStartOf="@id/btnSearch"
+            android:layout_toEndOf="@id/imgBack"
+            android:background="@drawable/input_text"
+            android:fontFamily="@font/poppinsmedium"
+            android:hint="Search in app"
+            android:maxLines="1"
+            android:paddingHorizontal="15dp"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/btnSearch"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/button"
+            android:src="@drawable/ic_search"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txtResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/poppinsbold"
+        android:text="Search result"
+        android:textColor="@color/teal_200"
+        android:textSize="18dp" />
+
+    <ListView
+        android:id="@+id/listResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtResult"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
+
+
+
+</RelativeLayout>

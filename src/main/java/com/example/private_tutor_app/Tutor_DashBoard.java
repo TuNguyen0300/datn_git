@@ -16,7 +16,7 @@ public class Tutor_DashBoard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tutor_dash_board);
+        setContentView(R.layout.activity_tutor_forum);
         nav = (BottomNavigationView) findViewById(R.id.Btm_Navigator);
         nav.setSelectedItemId(R.id.navigation_home);
 
@@ -29,7 +29,7 @@ public class Tutor_DashBoard extends AppCompatActivity {
                         startActivity(new Intent(Tutor_DashBoard.this, Tutor_Home.class));
                         overridePendingTransition(0,0);
                         return true;
-                    case R.id.navigation_dashboard:
+                    case R.id.navigation_forum:
                         return true;
                     case R.id.navigation_chat:
                         startActivity(new Intent(Tutor_DashBoard.this, Tutor_Chat.class));

@@ -7,6 +7,11 @@
     tools:context=".Tutor_Profile"
     android:background="@drawable/img">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/img_11" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,7 +29,8 @@
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="85dp" />
+        android:src="@drawable/ic_person_o"
+        android:layout_marginTop="120dp" />
 
     <TextView
         android:id="@+id/txtFullname"
@@ -76,44 +82,18 @@
             android:textSize="18dp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layCreatedClass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layUpdate"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="10dp"
-        android:background="#E5F6BE"
-        android:orientation="horizontal"
-        android:paddingVertical="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="40dp"
-            android:text="Accepted classes"
-            android:textColor="#6F9517"
-            android:textSize="18dp" />
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="40dp"
-            android:src="@drawable/img_1" />
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layFavouriteTutor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layCreatedClass"
+        android:layout_below="@id/layUpdate"
         android:layout_marginHorizontal="30dp"
-        android:paddingVertical="5dp"
-        android:background="#D3FBF4"
         android:layout_marginTop="10dp"
+        android:background="#D3FBF4"
         android:orientation="horizontal"
-        android:paddingHorizontal="20dp">
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="5dp">
 
         <ImageView
             android:layout_width="80dp"
@@ -124,9 +104,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="#166C5B"
             android:layout_marginLeft="40dp"
             android:text="Saved classes"
+            android:textColor="#166C5B"
             android:textSize="18dp" />
     </LinearLayout>
 
@@ -135,10 +115,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/layFavouriteTutor"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="90dp"
         android:orientation="horizontal"
         android:paddingHorizontal="20dp"
         android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         >
 
         <TextView
@@ -155,6 +136,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
             android:src="@drawable/ic_logout" />
     </LinearLayout>
 

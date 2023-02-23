@@ -28,16 +28,5 @@
         app:layout_constraintStart_toEndOf="@id/img_avatar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.8"/>
-    <TextView
-        android:id="@+id/texDateTime"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:textColor="@color/icon_background"
-        android:textSize="@dimen/_10sdp"
-        android:text="Time"
-        android:fontFamily="@font/poppinsmedium"
-        app:layout_constraintStart_toEndOf="@id/img_avatar"
-        app:layout_constraintTop_toBottomOf="@id/show_message"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

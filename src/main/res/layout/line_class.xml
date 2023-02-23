@@ -2,18 +2,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@drawable/background_line"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
 
     <TextView
         android:id="@+id/txtDescript"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="description"
-        android:textSize="20dp"
-        android:fontFamily="@font/poppinsmedium"
-        android:textColor="#1C7120"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:fontFamily="@font/poppinsmedium"
+        android:text="description"
+        android:textColor="#1C7120"
+        android:textSize="18dp" />
 
     <ImageView
         android:id="@+id/imReq"
@@ -23,16 +28,17 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:src="@drawable/ic_check" />
+
     <TextView
         android:id="@+id/txtRequire"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtDescript"
-        android:layout_toRightOf="@+id/imReq"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/imReq"
         android:text="requirement"
-        android:textSize="18dp" />
+        android:textSize="15dp" />
 
     <ImageView
         android:id="@+id/imSub"
@@ -42,18 +48,19 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:src="@drawable/ic_book" />
+
     <TextView
         android:id="@+id/txtSubject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtRequire"
-        android:layout_toRightOf="@+id/imSub"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/imSub"
         android:background="#DEF1FA"
         android:text="subject"
         android:textColor="#4864F3"
-        android:textSize="18dp" />
+        android:textSize="15dp" />
 
     <ImageView
         android:id="@+id/imFee"
@@ -73,7 +80,7 @@
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/imFee"
         android:text="fee"
-        android:textSize="18dp" />
+        android:textSize="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -82,7 +89,7 @@
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/txFee"
         android:text="/once"
-        android:textSize="18dp" />
+        android:textSize="15dp" />
 
     <ImageView
         android:id="@+id/imAddress"
@@ -104,7 +111,7 @@
         android:background="#F8F1B6"
         android:text="address"
         android:textColor="#C59C21"
-        android:textSize="18dp" />
+        android:textSize="15dp" />
 
     <ImageView
         android:id="@+id/imDate"
@@ -125,7 +132,7 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/imDate"
         android:text="Create date"
-        android:textSize="17dp" />
+        android:textSize="15dp" />
 
     <TextView
         android:id="@+id/txtViewMore"
@@ -136,6 +143,6 @@
         android:layout_marginTop="5dp"
         android:text="View more >>"
         android:textColor="#AA0E0E"
-        android:textSize="18dp" />
+        android:textSize="15dp" />
 
 </RelativeLayout>

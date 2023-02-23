@@ -22,6 +22,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.private_tutor_app.adapter.ClassCreatedAdapter;
+import com.example.private_tutor_app.model.Class;
 import com.example.private_tutor_app.utilities.Constants;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -64,7 +66,7 @@ public class Parent_Board extends AppCompatActivity {
                         startActivity(new Intent(Parent_Board.this, Parent_Home.class));
                         overridePendingTransition(0,0);
                         return true;
-                    case R.id.navigation_dashboard:
+                    case R.id.navigation_forum:
                         return true;
                     case R.id.navigation_chat:
                         startActivity(new Intent(Parent_Board.this, Parent_Chat.class));
@@ -99,11 +101,14 @@ public class Parent_Board extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         int count = 0;
                         arrayClasses.clear();
+                        //Toast.makeText(Parent_Board.this, Constants.ID_USER, Toast.LENGTH_LONG).show();
                         for(int i=0; i< response.length(); i++){
                             try {
                                 JSONObject object = response.getJSONObject(i);
-                                int id_parent = object.getInt("Id_Parent");
-                                if(id_parent == Constants.ID_PARENT){
+                                String id_parent = object.getString("Id_Parent");
+                                //int id_parent = object.getInt("Id_Parent");
+
+                                if(id_parent.equals(Constants.ID_USER)){
                                     arrayClasses.add(new Class(
                                             object.getString("Description"),
                                             object.getString("Create_date"),
@@ -112,7 +117,8 @@ public class Parent_Board extends AppCompatActivity {
                                             object.getString("Fee"),
                                             object.getString("Address"),
                                             object.getString("Require"),
-                                            object.getString("Times")
+                                            object.getString("Times"),
+                                            object.getString("Id_Parent")
                                     ));
                                     count++;
                                 }

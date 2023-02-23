@@ -1,26 +1,31 @@
 package com.example.private_tutor_app.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.private_tutor_app.model.Class;
-import com.example.private_tutor_app.ClassDetails;
+import com.example.private_tutor_app.CreatedClassDetail;
+import com.example.private_tutor_app.Parent_Board;
+import com.example.private_tutor_app.Parent_edit_class;
 import com.example.private_tutor_app.R;
+import com.example.private_tutor_app.model.Class;
 
 import java.util.List;
 
-public class ClassAdapter extends BaseAdapter {
+public class ClassCreatedAdapter extends BaseAdapter {
 
-    private Context context;
+    private Parent_Board context;
     private int layout;
     private List<Class> classList;
 
-    public ClassAdapter(Context context, int layout, List<Class> classList) {
+    public ClassCreatedAdapter(Parent_Board context, int layout, List<Class> classList) {
         this.context = context;
         this.layout = layout;
         this.classList = classList;
@@ -43,6 +48,7 @@ public class ClassAdapter extends BaseAdapter {
 
     private class ViewHolder{
         TextView txtDescript, txtRequire, txtSubject, txtFee, txtAddress, txtDate, txtViewMore, txtGrade, txtTimes;
+        ImageView imgEdit, imgDelete;
     }
 
     @Override
@@ -62,6 +68,8 @@ public class ClassAdapter extends BaseAdapter {
             holder.txtGrade= (TextView) view.findViewById(R.id.grade);
             holder.txtTimes= (TextView) view.findViewById(R.id.times);
             holder.txtViewMore= (TextView) view.findViewById(R.id.txtViewMore);
+            holder.imgEdit = (ImageView) view.findViewById(R.id.imEdit);
+            holder.imgDelete = (ImageView) view.findViewById(R.id.imDelete);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -79,11 +87,44 @@ public class ClassAdapter extends BaseAdapter {
         holder.txtViewMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ClassDetails.class);
+                Intent intent = new Intent(context, CreatedClassDetail.class);
                 intent.putExtra("dataClass", classTutor);
                 context.startActivity(intent);
             }
         });
+
+        holder.imgEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intents = new Intent(context, Parent_edit_class.class);
+                intents.putExtra("dataClass", classTutor);
+                context.startActivity(intents);
+            }
+        });
+
+        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                confirmDelete(classTutor.getDescription(), classTutor.getId_class());
+            }
+        });
         return view;
+    }
+    private void confirmDelete(String des, int idClass){
+        AlertDialog.Builder dialogDel = new AlertDialog.Builder(context);
+        dialogDel.setMessage("Do you really want to delete: "+ des +" ?");
+        dialogDel.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                context.DeleteClass(idClass);
+            }
+        });
+        dialogDel.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        dialogDel.show();
     }
 }

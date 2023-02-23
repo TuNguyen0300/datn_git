@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Parent_Board">
+
     <LinearLayout
         android:id="@+id/imgHeader"
         android:layout_width="match_parent"

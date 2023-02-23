@@ -17,8 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/poppinsbold"
             android:text="Fullname"
@@ -27,51 +27,48 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/search"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/layoutheader">
+        android:layout_below="@+id/layoutheader"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true">
 
-        <EditText
+        <TextView
             android:id="@+id/boxSearch"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
             android:background="@drawable/input_text"
             android:fontFamily="@font/poppinsmedium"
             android:hint="Search in app"
             android:maxLines="1"
-            android:paddingHorizontal="10dp"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp"
+            android:textSize="15dp"
+            android:layout_marginLeft="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnSearch"
-            app:layout_constraintHorizontal_bias="0.638"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintEnd_toStartOf="@id/btnSearch"/>
 
         <ImageView
             android:id="@+id/btnSearch"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="24dp"
             android:background="@drawable/button"
             android:src="@drawable/ic_search"
+            android:layout_marginLeft="20dp"
             app:layout_constraintBottom_toBottomOf="@id/boxSearch"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/boxSearch"
-
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintStart_toEndOf="@id/boxSearch"
+            app:layout_constraintTop_toTopOf="@id/boxSearch" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/txtFindtutor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/search"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/search"
         android:fontFamily="@font/poppinsbold"
         android:text="Finding tutors"
         android:textColor="#1E6B8E"
@@ -84,7 +81,10 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/Btm_Navigator"
         android:layout_below="@+id/txtFindtutor"
-        android:layout_marginTop="2dp" />
+        android:layout_marginTop="2dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
+        android:background="#E9ECE9"/>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/Btm_Navigator"
         android:layout_width="match_parent"

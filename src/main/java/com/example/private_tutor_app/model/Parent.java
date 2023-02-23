@@ -11,16 +11,8 @@ public class Parent {
     private String phoneNumber;
     private String address;
     private Bitmap photo;
-    private Uri img;
 
-    public Parent(int id_parent, String fullName, String email, String password, String phoneNumber, String address, Uri img) {
-        this.id_parent = id_parent;
-        this.fullName = fullName;
-        this.email = email;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.img = img;
+    public Parent() {
     }
 
     public Parent(int id_parent, String fullName, String email, String password, String phoneNumber, String address, Bitmap photo) {

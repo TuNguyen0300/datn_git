@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/_16sdp"
-        android:background="@drawable/background_contain_top"
+        android:background="@drawable/img_14"
         app:layout_constraintBottom_toTopOf="@id/laySend"
         app:layout_constraintTop_toBottomOf="@+id/header">
 

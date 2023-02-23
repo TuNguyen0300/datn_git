@@ -7,12 +7,12 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_forum"
         android:icon="@drawable/ic_baseline_add_to_photos_24"
         android:title="Create" />
     <item
         android:id="@+id/navigation_chat"
-        android:icon="@drawable/ic_chat"
+        android:icon="@drawable/ic_baseline_forum_24"
         android:title="Chat" />
     <item
         android:id="@+id/navigation_profile"

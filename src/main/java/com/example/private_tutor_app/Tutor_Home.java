@@ -2,10 +2,12 @@ package com.example.private_tutor_app;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.private_tutor_app.adapter.ClassAdapter;
+import com.example.private_tutor_app.model.Class;
 import com.example.private_tutor_app.utilities.Constants;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -29,6 +32,8 @@ public class Tutor_Home extends AppCompatActivity {
 
     BottomNavigationView nav;
     TextView txtFullName;
+
+    ConstraintLayout search;
 
     String urlGetData_class = Constants.BASE_URL + "Tutor_app/getClass.php";
 
@@ -44,8 +49,9 @@ public class Tutor_Home extends AppCompatActivity {
 
         nav = (BottomNavigationView) findViewById(R.id.Btm_Navigator);
         txtFullName = findViewById(R.id.txtFullName);
+        search = findViewById(R.id.search);
 
-        txtFullName.setText("Wellcome, " + Constants.FULLNAME);
+        txtFullName.setText("Welcome, " + Constants.FULLNAME);
 
         nav.setSelectedItemId(R.id.navigation_home);
 
@@ -56,7 +62,7 @@ public class Tutor_Home extends AppCompatActivity {
                 {
                     case R.id.navigation_home:
                         return true;
-                    case R.id.navigation_dashboard:
+                    case R.id.navigation_forum:
                         startActivity(new Intent(Tutor_Home.this, Tutor_DashBoard.class));
                         overridePendingTransition(0,0);
                         return true;
@@ -78,6 +84,16 @@ public class Tutor_Home extends AppCompatActivity {
         adapterClass = new ClassAdapter(this, R.layout.line_class, arrayClasses);
         classList.setAdapter(adapterClass);
         getData(urlGetData_class);
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Tutor_Home.this, Search.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("code", "class");
+                startActivity(intent);
+            }
+        });
     }
     private void getData(String url){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -96,7 +112,8 @@ public class Tutor_Home extends AppCompatActivity {
                                         object.getString("Fee"),
                                         object.getString("Address"),
                                         object.getString("Require"),
-                                        object.getString("Times")
+                                        object.getString("Times"),
+                                        object.getString("Id_Parent")
                                 ));
 
                             } catch (Exception e){

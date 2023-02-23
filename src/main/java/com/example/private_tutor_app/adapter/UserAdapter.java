@@ -53,7 +53,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                 Intent intent = new Intent(mContext, ChatActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("userId", user.getId());
-                intent.putExtra("userFullname", user.getFullname());
                 mContext.startActivity(intent);
             }
         });

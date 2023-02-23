@@ -7,13 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.private_tutor_app.model.Tutor;
 
 public class TutorDetails extends AppCompatActivity {
 
     TextView txtFName, txtEmail, txtPNumber, txtAddr, txtSchool, txtSub, txtExp, txtYoB, txtGender;
-    ImageView imgContact, imgBack;
+    ImageView imgAvatar, imgContact, imgBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,8 @@ public class TutorDetails extends AppCompatActivity {
         txtYoB = findViewById(R.id.yob);
         txtGender = findViewById(R.id.gender);
         imgBack = findViewById(R.id.icBack);
+        imgContact = findViewById(R.id.imgContact);
+        imgAvatar = findViewById(R.id.imgAvatar);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +55,23 @@ public class TutorDetails extends AppCompatActivity {
         txtSub.setText(tutors.getSubject());
         txtSchool.setText(tutors.getSchool());
         txtExp.setText(tutors.getExperience());
+
+        if(tutors.getImageUrl().equals("default")){
+            imgAvatar.setImageResource(R.drawable.img_5);
+        } else {
+            Glide.with(this).load(tutors.getImageUrl()).into(imgAvatar);
+        }
+
+        imgContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(TutorDetails.this, tutors.getId_user(), Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(TutorDetails.this, ChatActivity.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent1.putExtra("userId", tutors.getId_user());
+                startActivity(intent1);
+            }
+        });
 
     }
 }

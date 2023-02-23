@@ -7,11 +7,16 @@
     tools:context=".Parent_Profile"
     android:background="@drawable/img">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/img_9" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/gradient2"
         android:fontFamily="@font/poppinsmedium"
         android:paddingHorizontal="50dp"
@@ -25,7 +30,7 @@
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="130dp"
         android:src="@drawable/ic_person_o" />
 
     <TextView
@@ -79,37 +84,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layCreatedClass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layUpdate"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="10dp"
-        android:background="#E5F6BE"
-        android:orientation="horizontal"
-        android:paddingVertical="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="60dp"
-            android:text="Created class"
-            android:textColor="#6F9517"
-            android:textSize="18dp" />
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="40dp"
-            android:src="@drawable/img_7" />
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/layFavouriteTutor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layCreatedClass"
+        android:layout_below="@id/layUpdate"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="10dp"
         android:background="#D3FBF4"

@@ -11,8 +11,6 @@ public class User implements Serializable {
     private String password;
     private String role;
     private String imageUrl;
-    private String token;
-    private Bitmap photo;
 
     public User() {
     }
@@ -26,29 +24,12 @@ public class User implements Serializable {
         this.imageUrl = urlImg;
     }
 
-    public User(String id, String fullname, String email, String password, String role, Bitmap photo) {
-        this.id = id;
-        this.fullname = fullname;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.photo = photo;
-    }
-
     public User(String id, String fullname, String email, String role, String urlImg) {
         this.id = id;
         this.fullname = fullname;
         this.email = email;
         this.imageUrl = urlImg;
         this.role = role;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public String getImageUrl() {
@@ -65,14 +46,6 @@ public class User implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Bitmap getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(Bitmap photo) {
-        this.photo = photo;
     }
 
     public String getFullname() {

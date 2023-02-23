@@ -1,11 +1,14 @@
 package com.example.private_tutor_app;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +18,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.private_tutor_app.model.User;
 import com.example.private_tutor_app.utilities.Constants;
@@ -36,6 +46,7 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Parent_Profile extends AppCompatActivity {
 
@@ -51,6 +62,8 @@ public class Parent_Profile extends AppCompatActivity {
     Uri imgUri = null;
     StorageTask uploadTask;
 
+    String urlUpload = Constants.BASE_URL + "Tutor_app/uploadImg.php";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +75,6 @@ public class Parent_Profile extends AppCompatActivity {
         layLogout = findViewById(R.id.layLogout);
         layFavoriteTutor = findViewById(R.id.layFavouriteTutor);
         layUpdate = findViewById(R.id.layUpdate);
-        layCreatedClass = findViewById(R.id.layCreatedClass);
 
         txtFullname.setText(Constants.FULLNAME);
         txtEmail.setText(Constants.EMAIL);
@@ -79,7 +91,7 @@ public class Parent_Profile extends AppCompatActivity {
                         startActivity(new Intent(Parent_Profile.this, Parent_Home.class));
                         overridePendingTransition(0,0);
                         return true;
-                    case R.id.navigation_dashboard:
+                    case R.id.navigation_forum:
                         startActivity(new Intent(Parent_Profile.this, Parent_Board.class));
                         overridePendingTransition(0,0);
                         return true;
@@ -153,6 +165,8 @@ public class Parent_Profile extends AppCompatActivity {
     }
     private void uploadImage(){
         if(imgUri != null){
+
+            //urlImg = imgUri.toString();
             StorageReference fileReference = storageReference.child(System.currentTimeMillis()+"."+getFileExtension(imgUri));
             uploadTask = fileReference.putFile(imgUri);
             uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -175,6 +189,8 @@ public class Parent_Profile extends AppCompatActivity {
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("imageUrl", mUri);
                         reference.updateChildren(map);
+
+                        UploadImgSQL(urlUpload, mUri);
                     } else{
                         Toast.makeText(Parent_Profile.this, "fail", Toast.LENGTH_SHORT).show();
                     }
@@ -200,5 +216,39 @@ public class Parent_Profile extends AppCompatActivity {
                 uploadImage();
             }
         }
+    }
+
+    public void UploadImgSQL(String url, String photo){
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.equals("Update successfully")){
+                            Toast.makeText(Parent_Profile.this, "Changed avatar", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(Parent_Profile.this, response, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        ){
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param = new HashMap<>();
+                param.put("id",String.valueOf(Constants.ID_PARENT));
+                param.put("role", "parent");
+                param.put("urlImg", photo);
+                return param;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 }

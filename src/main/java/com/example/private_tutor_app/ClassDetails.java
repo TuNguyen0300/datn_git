@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.private_tutor_app.model.Class;
+
 public class ClassDetails extends AppCompatActivity {
 
     TextView txtDes, txtReq, txtSub, txtFee, txtAdd, txtGrade, txtDate, txtTimes;
@@ -48,5 +50,17 @@ public class ClassDetails extends AppCompatActivity {
         txtAdd.setText(classTutor.getAddress());
         txtTimes.setText(classTutor.getTimes());
         txtDate.setText(classTutor.getDate());
+
+        imgContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(ClassDetails.this, ChatActivity.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent1.putExtra("userId", classTutor.getId_parent());
+                startActivity(intent1);
+            }
+        });
+
+
     }
 }

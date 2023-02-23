@@ -8,13 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.private_tutor_app.adapter.UserAdapter;
 import com.example.private_tutor_app.model.User;
-import com.example.private_tutor_app.utilities.PreferenceManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

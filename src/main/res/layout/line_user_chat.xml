@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="10dp"
     >
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -10,15 +9,14 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginLeft="10dp"
-        android:paddingVertical="10dp"
-        android:layout_marginTop="10dp" />
+        android:paddingVertical="10dp" />
 
     <TextView
         android:id="@+id/txtFullnam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_toRightOf="@id/imgAvatar"
         android:fontFamily="@font/poppinsbold"
         android:maxLines="1"

@@ -66,17 +66,8 @@ public class ChatActivity extends AppCompatActivity {
 
         intent = getIntent();
         String userId = intent.getStringExtra("userId");
-        String userFN = intent.getStringExtra("userFullname");
 
         fUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        imgBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ChatActivity.this, Parent_Chat.class));
-                finish();
-            }
-        });
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override

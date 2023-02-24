@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.private_tutor_app.R;
@@ -42,7 +43,7 @@ public class TutorAdapter extends BaseAdapter {
         TextView txtFullname, txtGender, txtSchool, txtSubject
                 , txtExperience, txtViewMore, txtEmail, txtPnumber
                 , txtAdd, txtYob;
-        ImageView imgAvatar, imgHeartOut, imgHeart;
+        ImageView imgAvatar;
     }
 
     @Override
@@ -68,8 +69,6 @@ public class TutorAdapter extends BaseAdapter {
             holder.txtPnumber = (TextView) view.findViewById(R.id.pNumber);
             holder.txtAdd = (TextView) view.findViewById(R.id.address);
             holder.txtYob = (TextView) view.findViewById(R.id.yob);
-            holder.imgHeartOut = view.findViewById(R.id.imgHeartOutline);
-            holder.imgHeart = view.findViewById(R.id.imgHeart);
             view.setTag(holder);
         } else {
             holder = (TutorAdapter.ViewHolder) view.getTag();
@@ -96,20 +95,6 @@ public class TutorAdapter extends BaseAdapter {
             }
         });
 
-        holder.imgHeartOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.imgHeart.setVisibility(View.VISIBLE);
-                holder.imgHeartOut.setVisibility(View.INVISIBLE);
-            }
-        });
-        holder.imgHeart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.imgHeart.setVisibility(View.INVISIBLE);
-                holder.imgHeartOut.setVisibility(View.VISIBLE);
-            }
-        });
         return view;
     }
 }

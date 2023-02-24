@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp"
+    android:padding="10dp"
     android:background="@drawable/background_line"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
@@ -25,22 +25,6 @@
         android:text="fullname"
         android:textColor="@color/teal_200"
         android:textSize="18dp" />
-    <ImageView
-        android:id="@+id/imgHeartOutline"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/img_heart_outline"/>
-
-    <ImageView
-        android:id="@+id/imgHeart"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/img_heart"
-        android:visibility="invisible"/>
 
     <ImageView
         android:id="@+id/imGender"
@@ -87,7 +71,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtSchool"
-        android:layout_marginTop="5dp"
         android:src="@drawable/ic_book" />
 
     <TextView
@@ -96,7 +79,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtSchool"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/imSub"
         android:text="subject"
         android:textSize="15dp" />
@@ -106,7 +88,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtSubject"
-        android:layout_marginTop="5dp"
         android:src="@drawable/ic_exp" />
 
     <TextView
@@ -115,7 +96,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtSubject"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/imExp"
         android:text="experience"
         android:textSize="15dp" />

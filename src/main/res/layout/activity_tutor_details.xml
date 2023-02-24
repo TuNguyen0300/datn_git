@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient1"
+    android:background="@drawable/img_1"
     tools:context=".TutorDetails">
 
     <ImageView
@@ -44,6 +44,27 @@
             android:layout_height="100dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp" />
+
+        <ImageView
+            android:id="@+id/imgHeartOutline"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/img_heart_outline" />
+
+        <ImageView
+            android:id="@+id/imgHeart"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/img_heart"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/fullname"

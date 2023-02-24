@@ -19,6 +19,23 @@ public class Tutor implements Serializable {
     private String experience;
     private String id_user;
 
+    public Tutor(int id_tutor, String fullName, String email, String password, String id_user, String imageUrl, String phoneNumber
+            , String address, String school, String gender, String yob, String subject, String experience) {
+        this.id_tutor = id_tutor;
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+        this.imageUrl = imageUrl;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.school = school;
+        this.gender = gender;
+        this.yob = yob;
+        this.subject = subject;
+        this.experience = experience;
+        this.id_user = id_user;
+    }
+
     public Tutor(String fullName, String email, String password, String imageUrl, String phoneNumber
             , String address, String school, String gender, String yob, String subject, String experience) {
         this.fullName = fullName;

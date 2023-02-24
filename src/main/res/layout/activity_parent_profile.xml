@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Parent_Profile"
-    android:background="@drawable/img">
+    android:background="@drawable/img_18">
 
     <ImageView
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/gradient2"
-        android:fontFamily="@font/poppinsmedium"
+        android:fontFamily="@font/poppinsbold"
         android:paddingHorizontal="50dp"
         android:text="User profile"
         android:textColor="#1A6A1D"

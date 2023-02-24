@@ -33,7 +33,6 @@ public class Parent_Home extends AppCompatActivity {
     BottomNavigationView nav;
 
     String urlGetData_Tutor = Constants.BASE_URL + "Tutor_app/getTutor.php";
-    String urlSearch_Tutor = Constants.BASE_URL + "Tutor_app/searchTutor.php";
 
     TextView txtFullName;
     ConstraintLayout search;
@@ -106,6 +105,7 @@ public class Parent_Home extends AppCompatActivity {
                             try {
                                 JSONObject object = response.getJSONObject(i);
                                 arrayTutor.add(new Tutor(
+                                        object.getInt("Id_Tutor"),
                                         object.getString("Fullname"),
                                         object.getString("Email"),
                                         object.getString("Password"),

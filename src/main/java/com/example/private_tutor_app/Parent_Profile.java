@@ -53,7 +53,7 @@ public class Parent_Profile extends AppCompatActivity {
     BottomNavigationView nav;
     ImageView imgAvatar;
     TextView txtFullname, txtEmail;
-    LinearLayout layUpdate, layCreatedClass, layFavoriteTutor, layLogout;
+    LinearLayout layUpdate, layFavoriteTutor, layLogout;
 
     FirebaseUser firebaseUser;
     DatabaseReference reference;
@@ -103,6 +103,12 @@ public class Parent_Profile extends AppCompatActivity {
                         return true;
                 }
                 return false;
+            }
+        });
+        layFavoriteTutor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Parent_Profile.this, FavTutor.class));
             }
         });
 

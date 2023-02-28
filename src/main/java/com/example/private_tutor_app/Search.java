@@ -173,7 +173,7 @@ public class Search extends AppCompatActivity {
     }
 
     public void SearchClass(String response) {
-        ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+//        ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
         try {
             JSONObject jsonObject = new JSONObject(response);
             JSONArray result = jsonObject.getJSONArray("Results");

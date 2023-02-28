@@ -120,6 +120,12 @@ public class Tutor_Profile extends AppCompatActivity {
                 finish();
             }
         });
+        laySavedClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Tutor_Profile.this, FavClass.class));
+            }
+        });
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());

@@ -33,7 +33,7 @@ public class Parent_edit_class extends AppCompatActivity {
     String urlUpdateClass = Constants.BASE_URL + "Tutor_app/updateClass.php";
 
     EditText edtDes, edtAdd, edtSub, edtGrade, edtFee, edtTimes, edtReq;
-    Button btnEdit, btnCancel;
+    Button btnUpdate, btnCancel;
     ImageView imBack;
     int id_class;
 
@@ -49,7 +49,7 @@ public class Parent_edit_class extends AppCompatActivity {
         edtFee = findViewById(R.id.edtFee);
         edtTimes = findViewById(R.id.edtTimes);
         edtReq = findViewById(R.id.edtRequirement);
-        btnEdit = findViewById(R.id.btnSignup);
+        btnUpdate = findViewById(R.id.btnUdate);
         btnCancel = findViewById(R.id.btnCancel);
         imBack = findViewById(R.id.icBack);
 
@@ -78,7 +78,7 @@ public class Parent_edit_class extends AppCompatActivity {
         edtTimes.setText(classTutor.getTimes());
         id_class = classTutor.getId_class();
 
-        btnEdit.setOnClickListener(new View.OnClickListener() {
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 UpdateClass(urlUpdateClass);

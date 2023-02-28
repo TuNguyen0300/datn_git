@@ -14,7 +14,21 @@ public class Class implements Serializable {
     private String times;
     private String id_parent;
 
-    public Class( String description, String date, String subject, String grade, String fee,
+    public Class(int id_class, String description, String date, String subject
+            , String grade, String fee, String address, String requirement, String times, String id_parent) {
+        this.id_class = id_class;
+        this.description = description;
+        this.date = date;
+        this.subject = subject;
+        this.grade = grade;
+        this.fee = fee;
+        this.address = address;
+        this.requirement = requirement;
+        this.times = times;
+        this.id_parent = id_parent;
+    }
+
+    public Class(String description, String date, String subject, String grade, String fee,
                  String address, String requirement, String times, String id_parent) {
         this.description = description;
         this.date = date;

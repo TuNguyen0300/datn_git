@@ -27,7 +27,6 @@ import com.example.private_tutor_app.utilities.Constants;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -103,7 +102,7 @@ public class TutorDetails extends AppCompatActivity {
         imgHeart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CancelFav(urlDeleteFavTutor, tutors.getId_tutor());
+                RemoveFav(urlDeleteFavTutor, tutors.getId_tutor());
             }
         });
 
@@ -183,7 +182,7 @@ public class TutorDetails extends AppCompatActivity {
         };
         requestQueue.add(stringRequest);
     }
-    public void CancelFav(String url, int idTut){
+    public void RemoveFav(String url, int idTut){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

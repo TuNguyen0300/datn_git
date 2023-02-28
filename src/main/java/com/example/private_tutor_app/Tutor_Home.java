@@ -105,6 +105,7 @@ public class Tutor_Home extends AppCompatActivity {
                             try {
                                 JSONObject object = response.getJSONObject(i);
                                 arrayClasses.add(new Class(
+                                        object.getInt("Id_Class"),
                                         object.getString("Description"),
                                         object.getString("Create_date"),
                                         object.getString("Subject"),

@@ -48,6 +48,7 @@ public class FavTutor extends AppCompatActivity {
 
         txt = findViewById(R.id.text);
         back = findViewById(R.id.icBack);
+
         tutorList = findViewById(R.id.listfavTutor);
         tutorArrayList = new ArrayList<>();
         tutorAdapter = new TutorAdapter(this, R.layout.line_tutor, tutorArrayList);
@@ -90,7 +91,7 @@ public class FavTutor extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
     public void DisplayTutor(String response) {
-        ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+        //ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
         try {
             JSONObject jsonObject = new JSONObject(response);
             JSONArray result = jsonObject.getJSONArray("FavTutors");
